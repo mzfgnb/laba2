@@ -22,12 +22,12 @@ public:
 class User : public USER {
 public: 
     User() {
-        cout << "Enter user login:";
+       /* cout << "Enter user login:";
         cin >> this->login;
 
         cout << endl << "Enter user password: ";
         cin >> this->password;
-        cout << endl;
+        cout << endl;*/
     }
     Mail mails[10];
 
@@ -36,11 +36,11 @@ public:
 class Admin : public USER {
 public:
     Admin() {
-        cout << "Enter Admin login: ";
+        /*cout << "Enter Admin login: ";
         cin >> this->login;
 
         cout << endl << "Enter Admin password: ";
         cin >> this->password;
-        cout << endl;
+        cout << endl;*/
     }
 };
