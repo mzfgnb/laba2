@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include "../Containers/MyVector.h"
 #include "../Mails/Mail.h"
 using namespace std;
 
@@ -22,25 +23,13 @@ public:
 class User : public USER {
 public: 
     User() {
-       /* cout << "Enter user login:";
-        cin >> this->login;
-
-        cout << endl << "Enter user password: ";
-        cin >> this->password;
-        cout << endl;*/
     }
-    Mail mails[10];
+    MyVector<Mail> mails;
 
 };
 
 class Admin : public USER {
 public:
     Admin() {
-        /*cout << "Enter Admin login: ";
-        cin >> this->login;
-
-        cout << endl << "Enter Admin password: ";
-        cin >> this->password;
-        cout << endl;*/
     }
 };

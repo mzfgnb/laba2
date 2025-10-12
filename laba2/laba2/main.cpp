@@ -1,6 +1,8 @@
 ﻿#include <iostream>
-#include <vector>
 #include <algorithm>
+#include <chrono>
+#include <thread>
+#include "Models/Containers/MyVector.h"
 #include "Models/User/User.h"
 #include "Models/Mails/Mail.h"
 using namespace std;
@@ -17,10 +19,12 @@ void PrintMenu() {
 
 int main() {
     setlocale(LC_ALL, "ru_RU.UTF-8");
-    vector<User> users;
+    MyVector<User> users;
 
     bool running = true;
     while (running) {
+        this_thread::sleep_for(std::chrono::seconds(2));
+        system("clear");
         PrintMenu();
         int choice;
         cin >> choice;
@@ -39,26 +43,26 @@ int main() {
             cout << "Введите логин для удаления: ";
             cin >> login;
 
-            auto it = remove_if(users.begin(), users.end(), [&](const User& u) {
-                return u.login == login;
-                });
-            if (it != users.end()) {
-                users.erase(it, users.end());
-                cout << "🗑️ Пользователь удалён.\n";
+            bool found = false;
+            for (size_t i = 0; i < users.get_size(); ++i) {
+                if (users[i].login == login) {
+                    users.remove_at(i);
+                    cout << "🗑️ Пользователь удалён.\n";
+                    found = true;
+                    break;
+                }
             }
-            else {
+            if (!found)
                 cout << "❌ Пользователь не найден.\n";
-            }
             break;
         }
         case 3: {
             cout << "\n=== Список пользователей ===\n";
-            for (const auto& u : users)
-                cout << u << "---------------------\n"; // вывод через <<
+            users.print_all();
             break;
         }
         case 4: {
-            sort(users.begin(), users.end());
+            users.sort();
             cout << "📋 Список отсортирован по логину.\n";
             break;
         }
